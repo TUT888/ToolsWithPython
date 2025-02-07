@@ -1,0 +1,6 @@
+conda create -n general
+conda activate general
+conda install pip
+pip install tqdm
+conda install -c conda-forge pydub
+conda install -c conda-forge ffmpeg
