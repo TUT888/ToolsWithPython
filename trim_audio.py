@@ -2,7 +2,6 @@ import argparse
 import os
 from tqdm import tqdm
 from pydub import AudioSegment 
-import configparser
 
 class AudioTrimmer():
   def __init__(self, config):
@@ -20,8 +19,10 @@ class AudioTrimmer():
   def trim_audio(self):
     if (self.output['type']=="single"):
       self.trim_single_audio()
+      print("Done.")
     elif (self.output['type']=="multi"):
       self.trim_multi_audio()
+      print("Done.")
     else:
       print("Invalid setting type, output type setting '" + self.output['type'] + "' is not supported.")
 
@@ -86,7 +87,7 @@ class AudioTrimmer():
         output_song = input_audio[start_time:end_time]
         output_song.export(savepath, format=self.input['filetype'])
       
-      print("Trim {}: {} - {} => DONE".format(outname, start_time, end_time))
+      print(" Trim {}: {} - {} => DONE".format(outname, start_time, end_time))
       pbar.update(1)
       pbar.refresh()
     return
