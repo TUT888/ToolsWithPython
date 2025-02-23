@@ -1,4 +1,4 @@
-from trim_audio import AudioTrimmer
+from utils.trim_audio.terminal.trim_audio import AudioTrimmer
 import configparser
 import os
 
@@ -42,6 +42,7 @@ def read_audio_trimmer_config(config):
     info_dict['input']['filetype'] = config['INPUT.SINGLE']['filetype']
     info_dict['input']['sub_directory']  = config['INPUT.SINGLE']['sub_directory']
     info_dict['input']['filename']  = config['INPUT.SINGLE']['filename']
+    
     messages.append("INPUT:")
     messages.append("- File type: {}".format(info_dict['input']['filetype']))
     messages.append("- File location: {}".format(os.path.join(
@@ -60,6 +61,7 @@ def read_audio_trimmer_config(config):
     info_dict['output']['end'] = config['OUTPUT.SINGLE']['end']
     info_dict['output']['sub_directory'] = config['OUTPUT.SINGLE']['sub_directory']
     info_dict['output']['filename'] = config['OUTPUT.SINGLE']['filename']
+
     messages.append("- Output file location: {}".format(os.path.join(
       info_dict['working_directory'], 
       info_dict['output']['directory'], 
@@ -71,6 +73,7 @@ def read_audio_trimmer_config(config):
   elif (output_type=="multi"):
     info_dict['input']['trim_info'] = config['OUTPUT.MULTI']['trim_info']
     info_dict['output']['sub_directory'] = config['OUTPUT.MULTI']['sub_directory']
+
     messages.append("- Trim info location: {}".format(os.path.join(
       info_dict['working_directory'], 
       info_dict['input']['directory'], 
@@ -113,7 +116,7 @@ def main():
   mode = select_option()
   try:
     mode = int(mode)
-    config_dict = read_config('config.ini', mode)
+    config_dict = read_config('./utils/trim_audio/terminal/config.ini', mode)
     if (config_dict):
       audio_trimmer = AudioTrimmer(config_dict)
       audio_trimmer.trim_audio()

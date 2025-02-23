@@ -3,3 +3,4 @@ config.ini
 /data
 /note
 /__pycache__
+/utils/edit_audio_info
